@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OCR Flask App</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}" defer></script>
+</head>
+<body>
+<div class="container">
+  <h1>TEXT EXTRACTION APP 🗣️💬🌐</h1>
+  <div class="options">
+    <label for="imageUpload" class="button">📷 Upload Image(s)</label>
+    <input type="file" id="imageUpload" accept="image/*" multiple hidden />
+
+    <label for="videoUpload" class="button">🎥 Upload Video</label>
+    <input type="file" id="videoUpload" accept="video/*" hidden />
+
+    <button class="button" id="startLive">🔴 Start Live OCR</button>
+    <button class="button" id="stopLive">🛑 Stop Live OCR</button>
+    <select id="languageSelect" class="dropdown">
+      <option value="en">English</option>
+      <option value="ta">Tamil</option>
+      <option value="es">Spanish</option>
+      <option value="fr">French</option>
+      <option value="de">German</option>
+      <option value="hi">Hindi</option>
+      <option value="zh">Chinese</option>
+      <option value="ja">Japanese</option>
+    </select>
+    <button class="button" id="translate">🌍 Translate Text</button>
+    <button class="button" id="speak">🔊 Text to Speech</button>
+    <button class="button" id="exportTxt">📤 Export to TXT</button>
+  </div>
+
+  <div class="output">
+    <p id="notification"></p>
+    <textarea id="outputText" placeholder="Extracted text will appear here..." readonly></textarea>
+    <div id="audioContainer" class="audio-container hidden">
+      <audio id="audioPlayer" controls></audio>
+      <button class="button" id="toggleAudio">⏯️ Pause</button>
+    </div>
+    <div id="annotatedImages"></div>
+  </div>
+</div>
+
+<div id="livePopup" class="popup hidden">
+  <div id="popupHeader">📡 Live OCR Feed (Drag me)</div>
+  <video id="liveVideo" src="/video_feed" autoplay muted></video>
+  <textarea id="liveText" readonly></textarea>
+</div>
+</body>
+</html>
